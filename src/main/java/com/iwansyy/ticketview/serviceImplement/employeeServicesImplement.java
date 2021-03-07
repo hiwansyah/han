@@ -47,4 +47,9 @@ public class employeeServicesImplement implements employeeServiceInterface {
     public void deleteById(String id) {
        repo.deleteById(id);
     }
+
+    @Override
+    public void getAuthLogin() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

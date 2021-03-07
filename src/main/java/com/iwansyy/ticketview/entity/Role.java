@@ -6,14 +6,19 @@
 package com.iwansyy.ticketview.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -31,22 +36,18 @@ public class Role implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "roleId")
+    @Column(name = "role_id")
     private String roleId;
-    @Basic(optional = false)
-    @Column(name = "roleName")
+    @Column(name = "role_name")
     private String roleName;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "roleId", fetch = FetchType.LAZY)
+    private List<Employee> employeeList;
 
     public Role() {
     }
 
     public Role(String roleId) {
         this.roleId = roleId;
-    }
-
-    public Role(String roleId, String roleName) {
-        this.roleId = roleId;
-        this.roleName = roleName;
     }
 
     public String getRoleId() {
@@ -65,6 +66,15 @@ public class Role implements Serializable {
         this.roleName = roleName;
     }
 
+    @XmlTransient
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
+    public void setEmployeeList(List<Employee> employeeList) {
+        this.employeeList = employeeList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -74,6 +84,7 @@ public class Role implements Serializable {
 
     @Override
     public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Role)) {
             return false;
         }

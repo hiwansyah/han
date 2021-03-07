@@ -30,11 +30,11 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "employee")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e"),
-    @NamedQuery(name = "Employee.findByEmployeeId", query = "SELECT e FROM Employee e WHERE e.employeeId = :employeeId"),
-    @NamedQuery(name = "Employee.findByEmployeeName", query = "SELECT e FROM Employee e WHERE e.employeeName = :employeeName"),
-    @NamedQuery(name = "Employee.findByPassword", query = "SELECT e FROM Employee e WHERE e.password = :password"),
-    @NamedQuery(name = "Employee.findByEmail", query = "SELECT e FROM Employee e WHERE e.email = :email")})
+    @NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e")
+    , @NamedQuery(name = "Employee.findByEmployeeId", query = "SELECT e FROM Employee e WHERE e.employeeId = :employeeId")
+    , @NamedQuery(name = "Employee.findByEmployeeName", query = "SELECT e FROM Employee e WHERE e.employeeName = :employeeName")
+    , @NamedQuery(name = "Employee.findByPassword", query = "SELECT e FROM Employee e WHERE e.password = :password")
+    , @NamedQuery(name = "Employee.findByEmail", query = "SELECT e FROM Employee e WHERE e.email = :email")})
 public class Employee implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -59,16 +59,13 @@ public class Employee implements Serializable {
     @JoinColumn(name = "division_id", referencedColumnName = "division_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Division divisionId;
+    @JoinColumn(name = "role_id", referencedColumnName = "role_id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Role roleId;
 
     public Employee() {
     }
 
-    public Employee(String employeeId, String employeeName, String password) {
-        this.employeeId = employeeId;
-        this.employeeName = employeeName;
-        this.password = password;
-
-    }
     public Employee(String employeeId) {
         this.employeeId = employeeId;
     }
@@ -76,6 +73,10 @@ public class Employee implements Serializable {
     public Employee(String employeeId, String email) {
         this.employeeId = employeeId;
         this.email = email;
+    }
+
+    public Employee(String employeeId, String employeeName, String password) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public String getEmployeeId() {
@@ -144,6 +145,14 @@ public class Employee implements Serializable {
         this.divisionId = divisionId;
     }
 
+    public Role getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Role roleId) {
+        this.roleId = roleId;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -153,6 +162,7 @@ public class Employee implements Serializable {
 
     @Override
     public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Employee)) {
             return false;
         }
@@ -167,5 +177,5 @@ public class Employee implements Serializable {
     public String toString() {
         return "com.iwansyy.ticketview.entity.Employee[ employeeId=" + employeeId + " ]";
     }
-
+    
 }

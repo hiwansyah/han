@@ -12,6 +12,7 @@
     <class>com.iwansyy.ticketview.entity.Positions</class>
     <class>com.iwansyy.ticketview.entity.Status</class>
     <class>com.iwansyy.ticketview.entity.Role</class>
+    <class>com.iwansyy.ticketview.entity.Files</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ticketview?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

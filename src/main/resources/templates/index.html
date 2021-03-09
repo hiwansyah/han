@@ -12,14 +12,13 @@
     <title>Ticket - Dashboard</title>
 
     <!-- Custom fonts for this template-->
-    <link th:href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        th:href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    <link th:href="@{vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link th:href="css/sb-admin-2.min.css" rel="stylesheet">
-    <link th:href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link th:href="@{css/sb-admin-2.min.css}" rel="stylesheet">
+    <link th:href="@{vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
 
 </head>
 
@@ -110,9 +109,9 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="login.html">Login</a>
-                        <a class="collapse-item" href="register.html">Register</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+                        <a class="collapse-item" th:href="login.html">Login</a>
+                        <a class="collapse-item" th:href="register.html">Register</a>
+                        <a class="collapse-item" th:href="forgot-password.html">Forgot Password</a>
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Other Pages:</h6>
                         <a class="collapse-item" href="404.html">404 Page</a>
@@ -272,7 +271,7 @@
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                        <img class="rounded-circle" th:src="@{/img/undraw_profile_1.svg}"
                                             alt="">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
@@ -284,7 +283,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
+                                        <img class="rounded-circle" th:src="@{/img/undraw_profile_2.svg}"
                                             alt="">
                                         <div class="status-indicator"></div>
                                     </div>
@@ -296,7 +295,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
+                                        <img class="rounded-circle" th:src="@{/img/undraw_profile_3.svg}"
                                             alt="">
                                         <div class="status-indicator bg-warning"></div>
                                     </div>
@@ -541,26 +540,26 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script th:src="vendor/jquery/jquery.min.js"></script>
-    <script th:src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{vendor/jquery/jquery.min.jss}"></script>
+    <script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
     <!-- Core plugin JavaScript-->
-    <script th:rc="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script th:rc="@{vendor/jquery-easing/jquery.easing.min.js}"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="@{js/sb-admin-2.min.js}"></script>
 
     <!-- Page level plugins -->
-    <script th:src="vendor/chart.js/Chart.min.js"></script>
-    <script th:src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script th:src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script th:src="@{vendor/chart.js/Chart.min.js}"></script>
+    <script th:src="@{vendor/datatables/jquery.dataTables.min.js}"></script>
+    <script th:src="@{vendor/datatables/dataTables.bootstrap4.min.js}"></script>
 
     <!-- Page level custom scripts -->
-    <script th:src="js/demo/datatables-demo.js"></script>
+    <script th:src="@{js/demo/datatables-demo.js}"></script>
 
     <!-- Page level custom scripts -->
-    <script th:src="js/demo/chart-area-demo.js"></script>
-    <script th:src="js/demo/chart-pie-demo.js"></script>
+    <script th:src="@{js/demo/chart-area-demo.js}"></script>
+    <script th:src="@{js/demo/chart-pie-demo.js}"></script>
 
 </body>
 

@@ -74,9 +74,11 @@ public class Employee implements Serializable {
         this.employeeId = employeeId;
         this.email = email;
     }
-
+    
     public Employee(String employeeId, String employeeName, String password) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.employeeId  = employeeId;
+        this.employeeName = employeeName;
+        this.password = password;
     }
 
     public String getEmployeeId() {

@@ -6,21 +6,18 @@
 package com.iwansyy.ticketview.entity;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -31,8 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Files.findAll", query = "SELECT f FROM Files f")
-    , @NamedQuery(name = "Files.findByFileId", query = "SELECT f FROM Files f WHERE f.fileId = :fileId")
-    , @NamedQuery(name = "Files.findByFileName", query = "SELECT f FROM Files f WHERE f.fileName = :fileName")})
+    , @NamedQuery(name = "Files.findByFileId", query = "SELECT f FROM Files f WHERE f.fileId = :fileId")})
 public class Files implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,13 +37,12 @@ public class Files implements Serializable {
     @Column(name = "file_id")
     private String fileId;
     @Basic(optional = false)
-    @Column(name = "fileName")
-    private String fileName;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ticketId", fetch = FetchType.LAZY)
-    private List<Files> filesList;
-    @JoinColumn(name = "ticket_id", referencedColumnName = "file_id")
+    @Lob
+    @Column(name = "binaryfile")
+    private byte[] binaryfile;
+    @JoinColumn(name = "ticket_id", referencedColumnName = "ticket_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Files ticketId;
+    private Ticket ticketId;
 
     public Files() {
     }
@@ -56,9 +51,9 @@ public class Files implements Serializable {
         this.fileId = fileId;
     }
 
-    public Files(String fileId, String fileName) {
+    public Files(String fileId, byte[] binaryfile) {
         this.fileId = fileId;
-        this.fileName = fileName;
+        this.binaryfile = binaryfile;
     }
 
     public String getFileId() {
@@ -69,28 +64,19 @@ public class Files implements Serializable {
         this.fileId = fileId;
     }
 
-    public String getFileName() {
-        return fileName;
+    public byte[] getBinaryfile() {
+        return binaryfile;
     }
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
+    public void setBinaryfile(byte[] binaryfile) {
+        this.binaryfile = binaryfile;
     }
 
-    @XmlTransient
-    public List<Files> getFilesList() {
-        return filesList;
-    }
-
-    public void setFilesList(List<Files> filesList) {
-        this.filesList = filesList;
-    }
-
-    public Files getTicketId() {
+    public Ticket getTicketId() {
         return ticketId;
     }
 
-    public void setTicketId(Files ticketId) {
+    public void setTicketId(Ticket ticketId) {
         this.ticketId = ticketId;
     }
 

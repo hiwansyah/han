@@ -40,7 +40,7 @@ public class Status implements Serializable {
     private String statusId;
     @Column(name = "status_name")
     private String statusName;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "statusId", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "statusId", fetch = FetchType.LAZY)
     private List<Ticket> ticketList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "statusId", fetch = FetchType.LAZY)
     private List<Logticket> logticketList;

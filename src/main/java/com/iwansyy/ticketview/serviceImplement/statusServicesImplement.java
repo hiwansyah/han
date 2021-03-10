@@ -31,10 +31,10 @@ public class statusServicesImplement implements statusServiceInterface {
     public Status getEmployeById(String id) {
         Optional<Status> optional = repo.findById(id);
         Status status = null;
-        if(optional.isPresent()){
+        if (optional.isPresent()) {
             status = optional.get();
-        }else{
-            throw new RuntimeException("Employee not foun in id : "+id);
+        } else {
+            throw new RuntimeException("Employee not foun in id : " + id);
         }
         return status;
     }

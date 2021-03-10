@@ -48,8 +48,6 @@ public class Priority implements Serializable {
     private Integer resolveTime;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "priorityId", fetch = FetchType.LAZY)
     private List<Issue> issueList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "priorityId", fetch = FetchType.LAZY)
-    private List<Ticket> ticketList;
 
     public Priority() {
     }
@@ -97,15 +95,6 @@ public class Priority implements Serializable {
 
     public void setIssueList(List<Issue> issueList) {
         this.issueList = issueList;
-    }
-
-    @XmlTransient
-    public List<Ticket> getTicketList() {
-        return ticketList;
-    }
-
-    public void setTicketList(List<Ticket> ticketList) {
-        this.ticketList = ticketList;
     }
 
     @Override

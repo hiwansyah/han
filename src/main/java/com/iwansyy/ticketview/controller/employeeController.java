@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  *
  * @author iwansy
  */
+
 @Controller
 public class employeeController {
 
@@ -32,7 +33,7 @@ public class employeeController {
     public String viewEmployeePage(Model model) {
         model.addAttribute("employeeList", employeeServices.getAllEmployee());
         System.out.println(model.addAllAttributes(employeeServices.getAllEmployee()));
-        
+
         return "employee";
     }
 
@@ -63,7 +64,55 @@ public class employeeController {
         return "";
     }
 
-//    @RequestMapping(value = "/employeeUpdate/{id}", method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+    @GetMapping("/employeeDelete/{id}")
+    public String deleteEmployee(@PathVariable(value = "id") String id) {
+        //System.out.println(id);
+        this.employeeServices.deleteById(id);
+        return "redirect:/employee";
+    }
+
+    //######
+    //SPRING SECURITY
+    //######
+    
+    @RequestMapping(value = "/loginPage", method = RequestMethod.GET)
+    public String loginPage() {
+        return "login";
+    }
+
+    @RequestMapping(value = "/employee", method = RequestMethod.GET)
+    public String homeadmin() {
+        System.out.println("homeadmin");
+        return "employee";
+    }
+
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String homedev() {
+        System.out.println("homedev");
+        return "employee";
+    }
+    
+    
+
+//    @RequestMapping(value = "/loginPage", method = RequestMethod.GET)
+//    public String loginPage() {
+//        return "login";
+//    }
+//    
+//    @RequestMapping(value = "/manager", method = RequestMethod.GET)
+//    public String homemanager() {
+//        
+//        System.out.println("homemanager");
+//        return "index";
+//    }
+//    @RequestMapping(value = "/employee", method = RequestMethod.GET)
+//    public String homeemployee() {
+//        System.out.println("homeemployee");
+//        
+//        return "index";
+//    }
+//    
+    //    @RequestMapping(value = "/employeeUpdate/{id}", method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 //    public ResponseEntity<Employee>  employeeUpdate(@PathVariable("id") String id){
 //        try {
 //            return new ResponseEntity<Employee>(employeeServices.getEmployeById(id), HttpStatus.OK);
@@ -83,12 +132,62 @@ public class employeeController {
 //        //System.out.println(employee.getEmployeeId());
 //        return "employee";
 //    }
+//      
+//    public class loginController {
+
+//    @Autowired
+//    private loginServicesImplement loginServices;
+//
+//    @RequestMapping()
+//    public String home(HttpSession session, Model model) {
+//        return "redirect:/login";
+//    }
+//
+//    @RequestMapping("/login")
+//    public String login() {
+//        return "login";
+//    }
 //    
-    @GetMapping("/employeeDelete/{id}")
-    public String deleteEmployee(@PathVariable(value = "id") String id) {
-        //System.out.println(id);
-        this.employeeServices.deleteById(id);
-        return "redirect:/employee";
-    }
+//    
+
+//    @RequestMapping(value = "/loginRequest", method = RequestMethod.POST)
+//    public String loginUser(
+//            @RequestParam("email") String email, 
+//            @RequestParam("password") String password,
+//            Model model) 
+//    {
+//        if (loginServices.getAuthSingIn(email, password)) {
+//            Employee employee = loginServices.getAuthBy(email, password);
+//            String name = employee.getEmployeeName();
+//            System.out.println(name);
+//            return "redirect:/employee";
+//        }
+//        return "redirect:/login";
+//    }
+
+//    @GetMapping("/login")
+//    public ModelAndView home(){
+//        ModelAndView modelAndView = new ModelAndView("home", "login", new Employee());
+//        System.out.println(modelAndView.getModelMap());
+//        return modelAndView;
+//    }
+//    @GetMapping("/employee")
+//    public ModelAndView home(){
+//        ModelAndView modelAndView = new ModelAndView("home", "login", new Employee());
+//        return modelAndView;
+//    }
+//
+//    @PostMapping(value = "/login")
+//    public ModelAndView getAuthLogin(@ModelAttribute("login") Employee employee) {
+//        Employee employee1 = repo.getAuthLogin()
+//    }
+//    @RequestMapping(value = "/login", method = RequestMethod.GET)
+//    public String getAuthLogin(
+//            @RequestParam(value = "email", required = false) String email,
+//            @RequestParam(value = "password", required = false) String password
+//    ) {
+//        return null;
+//    }
+//}
 
 }

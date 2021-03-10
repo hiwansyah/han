@@ -12,5 +12,7 @@ public interface employeeServiceInterface {
     void update(Employee employee);
     void delete(Employee employee);
     void deleteById(String id);
-    void getAuthLogin();
+   //Employee getByMailPassword(String email, String password); 
+    Employee getByMail(String email); 
+    
 }

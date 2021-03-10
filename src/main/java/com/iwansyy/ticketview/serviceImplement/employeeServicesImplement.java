@@ -16,7 +16,12 @@ public class employeeServicesImplement implements employeeServiceInterface {
 
     @Autowired
     private employeeRepository repo;
-
+    
+    @Autowired
+    employeeServicesImplement esi;
+    
+    
+    
     public void save(Employee employee) {
         repo.save(employee);
     }
@@ -25,16 +30,16 @@ public class employeeServicesImplement implements employeeServiceInterface {
         return (List<Employee>) repo.findAll();
     }
 
-    public Employee getEmployeById(String id) {
-        Optional<Employee> optional = repo.findById(id);
-        Employee employee = null;
-        if(optional.isPresent()){
-            employee = optional.get();
-        }else{
-            throw new RuntimeException("Employee not foun in id : "+id);
-        }
-        return employee;
-    }
+//    public Employee getEmployeById(String id) {
+//        Optional<Employee> optional = repo.findById(id);
+//        Employee employee = null;
+//        if(optional.isPresent()){
+//            employee = optional.get();
+//        }else{
+//            throw new RuntimeException("Employee not foun in id : "+id);
+//        }
+//        return employee;
+//    }
 
     public void update(Employee employee) {
         repo.save(employee);
@@ -48,8 +53,20 @@ public class employeeServicesImplement implements employeeServiceInterface {
        repo.deleteById(id);
     }
 
+//    @Override
+//    public Employee getByMailPassword(String email, String password) {
+//        return repo.getByMailPassword(email, password);
+//        
+//    }
+
     @Override
-    public void getAuthLogin() {
+    public Employee getByMail(String email) {
+             return repo.getByMail(email);
+    }
+
+    @Override
+    public Employee getEmployeById(String id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 }

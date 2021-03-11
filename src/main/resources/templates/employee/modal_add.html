@@ -1,0 +1,28 @@
+<form th:fragment="form">
+    <div class="modal fade" id="addEmployee" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h4 class="modal-title"><span class="fa fa-plus-circle"></span> Add Employee</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" th:field="*{employeeId}" placeholder=" .. . Id " class="form-control mb-4 col-4">
+                        <input type="text" th:field="*{employeeName}" placeholder=" .. . Name " class="form-control mb-4 col-4">
+                        <input type="text" th:field="*{password}" placeholder=" .. . Pass " class="form-control mb-4 col-4">
+                        <input type="text" th:field="*{email}" placeholder=" .. . Email " class="form-control mb-4 col-4">
+                        <input type="text" th:field="*{positionId}" placeholder=" .. . Position Id " class="form-control mb-4 col-4">
+                        <input type="text" th:field="*{divisionId}" placeholder=" .. . Division Id" class="form-control mb-4 col-4">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" id="add-row" class="btn btn-success">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -27,26 +27,41 @@ public class employeeController {
 
     @Autowired
     private employeeServicesImplement employeeServices;
-
-    @GetMapping("/employee")
-    public String viewEmployeePage(Model model) {
-        model.addAttribute("employeeList", employeeServices.getAllEmployee());
-        return "employee";
+    
+    @RequestMapping(value = "/employeeAdd", method = RequestMethod.POST)
+    public String showInsertForm(
+            @RequestParam(value = "employeeId", required = false) String employeeId,
+            @RequestParam(value = "employeeName", required = false) String employeeName,
+            @RequestParam(value = "password", required = false) String password
+    ) {
+        Employee employee = new Employee(employeeId, employeeName, password);
+        //System.out.println(employeeId);
+        employeeServices.save(employee);
+        return "redirect:/employee";
     }
 
-    @GetMapping("/employeeAdd")
-    public String viewNewEmployeeForm(Model model) {
-        Employee employee = new Employee();
-        //System.out.println(model.addAttribute("employee", employee));
-        model.addAttribute("employee", employee);
-        return "employeeAdd";
+//    @GetMapping("/employee")
+//    public String viewEmployeePage(@RequestParam(value = "employeeId") String id, @RequestModel model) {
+//        model.addAttribute("employeeList", employeeServices.getAllEmployee());
+//        
+//        Employee employeecrud = new Employee();
+//        model.addAttribute("addEmployee", employeecrud);
+//        
+//        
+//        return "employee/employee";
+//    }
+
+    @PostMapping("/employeeAdd")
+    public String viewNewEmployeeForm(@ModelAttribute("addEmployee") Employee employee) {
+        this.employeeServices.save(employee);
+        return "redirect:/employee";
     }
 
     @PostMapping("/employeeSave")
     public String saveEmployee(@ModelAttribute("employee") Employee employee) {
        //System.out.println(employee.getClass());
         this.employeeServices.save(employee);
-        return "employeeAdd";
+        return "employee/employeeAdd";
     }
 
     @RequestMapping(value = "/employeeUpdate/{id}", method = RequestMethod.POST)

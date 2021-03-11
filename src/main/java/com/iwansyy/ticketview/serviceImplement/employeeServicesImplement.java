@@ -21,8 +21,8 @@ public class employeeServicesImplement implements employeeServiceInterface {
         repo.save(employee);
     }
 
-    public List<Employee> getAllEmployee() {
-        return (List<Employee>) repo.findAll();
+    public Iterable<Employee> getAllEmployee() {
+        return repo.findAll();
     }
 
     public Employee getEmployeById(String id) {

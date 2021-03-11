@@ -14,18 +14,11 @@ import org.springframework.security.web.authentication.logout.LogoutHandler;
  *
  * @author iwansy
  */
+//
 public class logoutHandler implements LogoutHandler{
 
     @Override
     public void logout(HttpServletRequest hsr, HttpServletResponse hsr1, Authentication a) {
         System.out.println("Succes Logout Handler");
     }
-    //public class Logout implements LogoutHandler{
-//
-//    @Override
-//    public void logout(HttpServletRequest hsr, HttpServletResponse hsr1, Authentication a) {
-//        System.out.println("Succes Log Out Handler");
-//    }
-//    
-//}
 }

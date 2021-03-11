@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import javafx.print.Collation;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -49,7 +48,7 @@ public class customSuccessHandler extends SimpleUrlAuthenticationSuccessHandler{
             roles.add(a.getAuthority());
         }
         System.out.println("Role DetermineTargetUrl"+roles);
-        if(roles.contains("ADMIN")){
+        if(roles.contains("ROLE01")){
             url = "/employee";
         } else {
             url = "/index";

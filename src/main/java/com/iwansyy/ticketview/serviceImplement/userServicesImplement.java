@@ -19,44 +19,52 @@ import org.springframework.stereotype.Controller;
  * @author iwansy
  */
 @Controller
-public class userServicesImplement implements UserDetailsService{
+public class userServicesImplement implements UserDetailsService {
 
     @Autowired
     employeeServicesImplement esi;
-    
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println("load by username "+ username);
+        System.out.println("load by username " + username);
+        
         ThisUser user = userConfig(username);
-      User.UserBuilder builder = null;
-      if (user != null){
-          builder = org.springframework.security.core.userdetails.User.withUsername(username);
-//          builder.password(user.getPassword());
-//          builder.roles(user.getRoles());
-      }
-      else{
-          System.out.println("user salah");
-      }
-       return builder.build();
+        
+        
+        User.UserBuilder builder = null;
+        if (user != null) {
+            builder = org.springframework.security.core.userdetails.User.withUsername(username);
+            builder.password(user.getPassword());
+            builder.roles(user.getRoles());
+        } else {
+            System.out.println("user salah");
+        }
+        return builder.build();
     }
-    
-    private ThisUser userConfig(String username){
-        String pwd = null, role = null;
-        Employee emp = esi.getByMail(pwd);
+
+    private ThisUser userConfig(String username) {
+        String pwd = "" , role = "";
+        Employee emp = esi.getByMail(username);
         if (emp != null) {
             username = emp.getEmail();
             pwd = emp.getPassword();
             role = emp.getRoleId().getRoleName();
-        } else {
-            System.out.println("acces denied");
+            System.out.println(username);
             System.out.println(pwd);
             System.out.println(role);
+        } else {
+            System.out.println("acces denied");
+//            System.out.println(pwd);
+//            System.out.println(role);
         }
-        
-    if (username.equalsIgnoreCase(username)){
-//        return new ThisUser(username, pwd, role);
+
+        if (username.equalsIgnoreCase(username)) {
+//            System.out.println(username);
+//            System.out.println(pwd);
+//            System.out.println(role);
+            return new ThisUser(username, pwd, role);
+        }
+        return null;
     }
-    return null;
-    }
-    
+
 }

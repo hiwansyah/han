@@ -1,0 +1,62 @@
+<form class="user" th:action="@{/loginpage}" method="POST">
+    <div class="form-group">
+        <input type="email" class="form-control form-control-user"
+        id="exampleInputEmail" name="email" aria-describedby="emailHelp"
+        placeholder="Username">
+    </div>
+    <div class="form-group">
+        <input type="password" class="form-control form-control-user"
+        id="exampleInputPassword" name="password" placeholder="Password">
+    </div>
+    <div class="form-group">
+        <div class="custom-control custom-checkbox small">
+            <input type="checkbox" class="custom-control-input" id="customCheck">
+            <label class="custom-control-label" for="customCheck">Remember
+            Me</label>
+        </div>
+    </div>
+    <a href="#TOMBOLLOGIN" class="btn btn-primary btn-user btn-block">
+        Login
+    </a>
+</form>
+
+
+
+
+
+<form th:action="@{/loginpage}" method="POST" class="login100-form validate-form">
+                        <div th:if="${param.error}" class="alert alert-danger">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <strong>Error!</strong> Username or password incorect
+                        </div>
+
+                        <div class="wrap-input100 validate-input" data-validate = "Enter username">
+                            <input class="input100" type="text" name="email" placeholder="Username">
+                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        </div>
+
+                        <div class="wrap-input100 validate-input" data-validate="Enter password">
+                            <input class="input100" type="password" name="password" placeholder="Password">
+                            <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                        </div>
+
+                        <div class="contact100-form-checkbox">
+                            <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                            <label class="label-checkbox100" for="ckb1">
+                                Remember me
+                            </label>
+                        </div>
+
+                        <div class="container-login100-form-btn">
+                            <button class="login100-form-btn">
+                                Login
+                            </button>
+                        </div>
+
+                        <div class="text-center p-t-90">
+                            <a class="txt1" href="#">
+                                Forgot Password?
+                            </a>
+                        </div>
+                    </form>
+

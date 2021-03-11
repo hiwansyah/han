@@ -28,9 +28,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalAuthentication
-
-public class securityConfig extends WebSecurityConfigurerAdapter{
+@EnableGlobalAuthentication   
+public class securityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource datasource;
     
@@ -71,16 +70,16 @@ public class securityConfig extends WebSecurityConfigurerAdapter{
                         "/forgetPass",
                         "/reset**",
                         "/forgotPassword").permitAll()
-                .antMatchers("/employee**").access("hasRole('ADMIN')")
-                .antMatchers("/employee*").access("hasRole('USER')")
+                .antMatchers("/employees**").access("hasRole('ROLE01')")
+                .antMatchers("/developers*").access("hasRole('ROLE02')")
                 .anyRequest()
                 .authenticated()
                 .and()
-                .formLogin().loginPage("/loginPage").permitAll()
+                .formLogin().loginPage("/loginpage").permitAll()
                 .successHandler(customSuccessHandler)
                 .usernameParameter("email")
                 .passwordParameter("password")
-                .failureUrl("/loginPage?error=true")
+                .failureUrl("/loginpage?error=true")
                 .permitAll()
                 .and()
                 .exceptionHandling()
@@ -89,68 +88,68 @@ public class securityConfig extends WebSecurityConfigurerAdapter{
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .addLogoutHandler(new logoutHandler())
-                .logoutSuccessUrl("/loginPage");
+                .logoutSuccessUrl("/loginpage");
     }
     
     
-//@Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth
-//                .userDetailsService(userDetailsService())
-//                .passwordEncoder(passwordEncoder());
-//    }
+////@Autowired
+////    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+////        auth
+////                .userDetailsService(userDetailsService())
+////                .passwordEncoder(passwordEncoder());
+////    }
+////
+////
+////    @Override
+////    protected void configure(HttpSecurity http) throws Exception {
+////        http.csrf().disable();
+////        http
+////                .authorizeRequests()
+////                .antMatchers(
+////                        "/forgetPass",
+////                        "/reset**",
+////                        "/forgotPassword").permitAll()
+////                .antMatchers("/indexAdm*").access("hasRole('MANAGER')")
+////                .antMatchers("/index*").access("hasRole('EMPLOYEE')")
+////                .anyRequest()
+////                .authenticated()
+////                .and()
+////                .formLogin().loginPage("/loginPage").permitAll()
+////                .successHandler(customSuccessHandler)
+////                .usernameParameter("email")
+////                .passwordParameter("password")
+////                .failureUrl("/loginPage?error=true")
+////                .permitAll()
+////                .and().csrf()
+////                .and()
+////                .exceptionHandling()
+////                .accessDeniedPage("/Access_Denied")
+////                .and()
+////                .logout()
+////                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+////                .addLogoutHandler(new Logout())
+////                .logoutSuccessUrl("/loginPage");
+////    }
+////
+////}
+//    //      @Bean
+////    public UserDetailsService userDetailsService() {
+////        return new UserDetailsServiceImp();
+////    }
 //
-//
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.csrf().disable();
-//        http
-//                .authorizeRequests()
-//                .antMatchers(
-//                        "/forgetPass",
-//                        "/reset**",
-//                        "/forgotPassword").permitAll()
-//                .antMatchers("/indexAdm*").access("hasRole('MANAGER')")
-//                .antMatchers("/index*").access("hasRole('EMPLOYEE')")
-//                .anyRequest()
-//                .authenticated()
-//                .and()
-//                .formLogin().loginPage("/loginPage").permitAll()
-//                .successHandler(customSuccessHandler)
-//                .usernameParameter("email")
-//                .passwordParameter("password")
-//                .failureUrl("/loginPage?error=true")
-//                .permitAll()
-//                .and().csrf()
-//                .and()
-//                .exceptionHandling()
-//                .accessDeniedPage("/Access_Denied")
-//                .and()
-//                .logout()
-//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//                .addLogoutHandler(new Logout())
-//                .logoutSuccessUrl("/loginPage");
-//    }
-//
-//}
-    //      @Bean
-//    public UserDetailsService userDetailsService() {
-//        return new UserDetailsServiceImp();
-//    }
-
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-//
-//    @Bean
-//    public JdbcUserDetailsManager jdbcUserDetailsManager() throws Exception {
-//        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager();
-//        jdbcUserDetailsManager.setDataSource(dataSource);
-//        return jdbcUserDetailsManager;
-//    }
-//
-//    
+////    @Bean
+////    public PasswordEncoder passwordEncoder() {
+////        return new BCryptPasswordEncoder();
+////    }
+////
+////    @Bean
+////    public JdbcUserDetailsManager jdbcUserDetailsManager() throws Exception {
+////        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager();
+////        jdbcUserDetailsManager.setDataSource(dataSource);
+////        return jdbcUserDetailsManager;
+////    }
+////
+////    
 
     
 }

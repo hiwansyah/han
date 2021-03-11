@@ -15,15 +15,15 @@ import org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean;
  * @author iwansy
  */
 
-@Configuration
+//@Configuration
 public class ApiConfig {
 
-    @Primary
-    @Bean
-    public FreeMarkerConfigurationFactoryBean factoryBean() {
-        FreeMarkerConfigurationFactoryBean bean = new FreeMarkerConfigurationFactoryBean();
-        bean.setTemplateLoaderPath("classpath:/templates");
-        return bean;
-    }
+//    @Primary
+//    @Bean
+//    public FreeMarkerConfigurationFactoryBean factoryBean() {
+//        FreeMarkerConfigurationFactoryBean bean = new FreeMarkerConfigurationFactoryBean();
+//        bean.setTemplateLoaderPath("classpath:/templates");
+//        return bean;
+//    }
 
 }

@@ -75,21 +75,21 @@ public class employeeController {
     //SPRING SECURITY
     //######
     
-    @RequestMapping(value = "/loginPage", method = RequestMethod.GET)
+    @RequestMapping(value = "/loginpage", method = RequestMethod.GET)
     public String loginPage() {
-        return "login";
+        return "loginbiasa";
     }
 
-    @RequestMapping(value = "/employee", method = RequestMethod.GET)
+    @RequestMapping(value = "/employees", method = RequestMethod.GET)
     public String homeadmin() {
         System.out.println("homeadmin");
-        return "employee";
+        return "index1";
     }
 
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    @RequestMapping(value = "/developers", method = RequestMethod.GET)
     public String homedev() {
         System.out.println("homedev");
-        return "employee";
+        return "index1";
     }
     
     

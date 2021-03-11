@@ -10,7 +10,6 @@
         <div id="wrapper">
             <!-- Sidebar -->
             <ul th:insert="component/sidebar.html :: sidebar"></ul>
-
             <!-- End of Sidebar -->
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
@@ -29,7 +28,6 @@
                             </a>
                         </div>
                         <!-- Begin Page Data Tables -->
-
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
                                 <h6 class="m-0 font-weight-bold text-primary">Ticket Table</h6>
@@ -44,7 +42,7 @@
                                         <th>Action</th>
                                         </thead>
                                         <tbody>
-                                            <tr th:each="employee : ${employeeList}">
+                                            <tr th:each="@{/employee} : ${employeeList}">
                                                 <td th:text="${employee.employeeId}">
                                                 <td th:text="${employee.employeeName}">
                                                 <td th:text="${employee.email}">

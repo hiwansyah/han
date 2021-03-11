@@ -6,9 +6,7 @@
 package com.iwansyy.ticketview.entity;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,10 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -49,8 +45,6 @@ public class Issue implements Serializable {
     @JoinColumn(name = "priority_id", referencedColumnName = "priority_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Priority priorityId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "issueId", fetch = FetchType.LAZY)
-    private List<Ticket> ticketList;
 
     public Issue() {
     }
@@ -94,15 +88,6 @@ public class Issue implements Serializable {
 
     public void setPriorityId(Priority priorityId) {
         this.priorityId = priorityId;
-    }
-
-    @XmlTransient
-    public List<Ticket> getTicketList() {
-        return ticketList;
-    }
-
-    public void setTicketList(List<Ticket> ticketList) {
-        this.ticketList = ticketList;
     }
 
     @Override

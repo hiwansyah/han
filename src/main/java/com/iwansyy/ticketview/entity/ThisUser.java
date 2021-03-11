@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.iwansyy.ticketview.controller;
+package com.iwansyy.ticketview.entity;
 
 /**
  *
  * @author iwansy
  */
-
-public class ticketController {
-    
+public class ThisUser {
+      
 }

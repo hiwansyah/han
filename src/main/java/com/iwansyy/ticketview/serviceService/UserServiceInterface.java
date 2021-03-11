@@ -5,6 +5,7 @@
  */
 package com.iwansyy.ticketview.serviceService;
 
+import com.iwansyy.ticketview.entity.Employee;
 import com.iwansyy.ticketview.entity.Users;
 
 /**
@@ -13,5 +14,5 @@ import com.iwansyy.ticketview.entity.Users;
  */
 
 public interface UserServiceInterface {
-    Users findUserByEmail(String email);
+    Employee findUserByEmail(String email);
 }

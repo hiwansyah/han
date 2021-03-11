@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Ticket.findAll", query = "SELECT t FROM Ticket t")
     , @NamedQuery(name = "Ticket.findByTicketId", query = "SELECT t FROM Ticket t WHERE t.ticketId = :ticketId")
-    , @NamedQuery(name = "Ticket.findBySubject", query = "SELECT t FROM Ticket t WHERE t.subject = :subject")
+    , @NamedQuery(name = "Ticket.findByResults", query = "SELECT t FROM Ticket t WHERE t.results = :results")
     , @NamedQuery(name = "Ticket.findByDescriptions", query = "SELECT t FROM Ticket t WHERE t.descriptions = :descriptions")
     , @NamedQuery(name = "Ticket.findByRequestName", query = "SELECT t FROM Ticket t WHERE t.requestName = :requestName")
     , @NamedQuery(name = "Ticket.findByEmailRequest", query = "SELECT t FROM Ticket t WHERE t.emailRequest = :emailRequest")
@@ -46,7 +46,15 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Ticket.findByResponseTime", query = "SELECT t FROM Ticket t WHERE t.responseTime = :responseTime")
     , @NamedQuery(name = "Ticket.findByResolutionTime", query = "SELECT t FROM Ticket t WHERE t.resolutionTime = :resolutionTime")
     , @NamedQuery(name = "Ticket.findByResolveTime", query = "SELECT t FROM Ticket t WHERE t.resolveTime = :resolveTime")
-    , @NamedQuery(name = "Ticket.findByChangeDate", query = "SELECT t FROM Ticket t WHERE t.changeDate = :changeDate")})
+    , @NamedQuery(name = "Ticket.findByChangeDate", query = "SELECT t FROM Ticket t WHERE t.changeDate = :changeDate")
+    , @NamedQuery(name = "Ticket.findByIssue", query = "SELECT t FROM Ticket t WHERE t.issue = :issue")
+    , @NamedQuery(name = "Ticket.findByPriority", query = "SELECT t FROM Ticket t WHERE t.priority = :priority")
+    , @NamedQuery(name = "Ticket.findByServices", query = "SELECT t FROM Ticket t WHERE t.services = :services")
+    , @NamedQuery(name = "Ticket.findByResponseStatus", query = "SELECT t FROM Ticket t WHERE t.responseStatus = :responseStatus")
+    , @NamedQuery(name = "Ticket.findByResolutionStatus", query = "SELECT t FROM Ticket t WHERE t.resolutionStatus = :resolutionStatus")
+    , @NamedQuery(name = "Ticket.findByResolutionCount", query = "SELECT t FROM Ticket t WHERE t.resolutionCount = :resolutionCount")
+    , @NamedQuery(name = "Ticket.findByResponseCount", query = "SELECT t FROM Ticket t WHERE t.responseCount = :responseCount")
+    , @NamedQuery(name = "Ticket.findByResolveCount", query = "SELECT t FROM Ticket t WHERE t.resolveCount = :resolveCount")})
 public class Ticket implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,9 +62,8 @@ public class Ticket implements Serializable {
     @Basic(optional = false)
     @Column(name = "ticket_id")
     private String ticketId;
-    @Basic(optional = false)
-    @Column(name = "subject")
-    private String subject;
+    @Column(name = "results")
+    private String results;
     @Basic(optional = false)
     @Column(name = "descriptions")
     private String descriptions;
@@ -69,39 +76,52 @@ public class Ticket implements Serializable {
     @Column(name = "regis_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date regisDate;
-    @Basic(optional = false)
     @Column(name = "assign_to")
     private String assignTo;
     @Column(name = "due_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dueDate;
-    @Basic(optional = false)
     @Column(name = "note_add")
     private String noteAdd;
     @Column(name = "response_time")
-    private Integer responseTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date responseTime;
     @Column(name = "resolution_time")
-    private Integer resolutionTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date resolutionTime;
     @Column(name = "resolve_time")
-    private Integer resolveTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date resolveTime;
     @Column(name = "change_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date changeDate;
+    @Basic(optional = false)
+    @Column(name = "issue")
+    private String issue;
+    @Basic(optional = false)
+    @Column(name = "priority")
+    private String priority;
+    @Basic(optional = false)
+    @Column(name = "services")
+    private String services;
+    @Column(name = "response_status")
+    private String responseStatus;
+    @Column(name = "resolution_status")
+    private String resolutionStatus;
+    @Column(name = "resolution_count")
+    private Integer resolutionCount;
+    @Column(name = "response_count")
+    private Integer responseCount;
+    @Column(name = "resolve_count")
+    private Integer resolveCount;
     @JoinColumn(name = "employee_id", referencedColumnName = "employee_id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Employee employeeId;
-    @JoinColumn(name = "services_id", referencedColumnName = "services_id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Services servicesId;
-    @JoinColumn(name = "issue_id", referencedColumnName = "issue_id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Issue issueId;
-    @JoinColumn(name = "priority_id", referencedColumnName = "priority_id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Priority priorityId;
     @JoinColumn(name = "status_id", referencedColumnName = "status_id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Status statusId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ticketId", fetch = FetchType.LAZY)
+    private List<Files> filesList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ticketId", fetch = FetchType.LAZY)
     private List<Logticket> logticketList;
 
@@ -112,14 +132,14 @@ public class Ticket implements Serializable {
         this.ticketId = ticketId;
     }
 
-    public Ticket(String ticketId, String subject, String descriptions, String requestName, String emailRequest, String assignTo, String noteAdd) {
+    public Ticket(String ticketId, String descriptions, String requestName, String emailRequest, String issue, String priority, String services) {
         this.ticketId = ticketId;
-        this.subject = subject;
         this.descriptions = descriptions;
         this.requestName = requestName;
         this.emailRequest = emailRequest;
-        this.assignTo = assignTo;
-        this.noteAdd = noteAdd;
+        this.issue = issue;
+        this.priority = priority;
+        this.services = services;
     }
 
     public String getTicketId() {
@@ -130,12 +150,12 @@ public class Ticket implements Serializable {
         this.ticketId = ticketId;
     }
 
-    public String getSubject() {
-        return subject;
+    public String getResults() {
+        return results;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public void setResults(String results) {
+        this.results = results;
     }
 
     public String getDescriptions() {
@@ -194,27 +214,27 @@ public class Ticket implements Serializable {
         this.noteAdd = noteAdd;
     }
 
-    public Integer getResponseTime() {
+    public Date getResponseTime() {
         return responseTime;
     }
 
-    public void setResponseTime(Integer responseTime) {
+    public void setResponseTime(Date responseTime) {
         this.responseTime = responseTime;
     }
 
-    public Integer getResolutionTime() {
+    public Date getResolutionTime() {
         return resolutionTime;
     }
 
-    public void setResolutionTime(Integer resolutionTime) {
+    public void setResolutionTime(Date resolutionTime) {
         this.resolutionTime = resolutionTime;
     }
 
-    public Integer getResolveTime() {
+    public Date getResolveTime() {
         return resolveTime;
     }
 
-    public void setResolveTime(Integer resolveTime) {
+    public void setResolveTime(Date resolveTime) {
         this.resolveTime = resolveTime;
     }
 
@@ -226,6 +246,70 @@ public class Ticket implements Serializable {
         this.changeDate = changeDate;
     }
 
+    public String getIssue() {
+        return issue;
+    }
+
+    public void setIssue(String issue) {
+        this.issue = issue;
+    }
+
+    public String getPriority() {
+        return priority;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = priority;
+    }
+
+    public String getServices() {
+        return services;
+    }
+
+    public void setServices(String services) {
+        this.services = services;
+    }
+
+    public String getResponseStatus() {
+        return responseStatus;
+    }
+
+    public void setResponseStatus(String responseStatus) {
+        this.responseStatus = responseStatus;
+    }
+
+    public String getResolutionStatus() {
+        return resolutionStatus;
+    }
+
+    public void setResolutionStatus(String resolutionStatus) {
+        this.resolutionStatus = resolutionStatus;
+    }
+
+    public Integer getResolutionCount() {
+        return resolutionCount;
+    }
+
+    public void setResolutionCount(Integer resolutionCount) {
+        this.resolutionCount = resolutionCount;
+    }
+
+    public Integer getResponseCount() {
+        return responseCount;
+    }
+
+    public void setResponseCount(Integer responseCount) {
+        this.responseCount = responseCount;
+    }
+
+    public Integer getResolveCount() {
+        return resolveCount;
+    }
+
+    public void setResolveCount(Integer resolveCount) {
+        this.resolveCount = resolveCount;
+    }
+
     public Employee getEmployeeId() {
         return employeeId;
     }
@@ -234,36 +318,21 @@ public class Ticket implements Serializable {
         this.employeeId = employeeId;
     }
 
-    public Services getServicesId() {
-        return servicesId;
-    }
-
-    public void setServicesId(Services servicesId) {
-        this.servicesId = servicesId;
-    }
-
-    public Issue getIssueId() {
-        return issueId;
-    }
-
-    public void setIssueId(Issue issueId) {
-        this.issueId = issueId;
-    }
-
-    public Priority getPriorityId() {
-        return priorityId;
-    }
-
-    public void setPriorityId(Priority priorityId) {
-        this.priorityId = priorityId;
-    }
-
     public Status getStatusId() {
         return statusId;
     }
 
     public void setStatusId(Status statusId) {
         this.statusId = statusId;
+    }
+
+    @XmlTransient
+    public List<Files> getFilesList() {
+        return filesList;
+    }
+
+    public void setFilesList(List<Files> filesList) {
+        this.filesList = filesList;
     }
 
     @XmlTransient

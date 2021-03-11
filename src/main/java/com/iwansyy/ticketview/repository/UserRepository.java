@@ -5,7 +5,7 @@
  */
 package com.iwansyy.ticketview.repository;
 
-import com.iwansyy.ticketview.entity.Users;
+import com.iwansyy.ticketview.entity.Employee;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public interface UserRepository extends CrudRepository<Users, String>{
+public interface UserRepository extends CrudRepository<Employee, String>{
     @Query(value = "Select * From Employee Where email =?1", nativeQuery = true)
-    public Users findUserByEmail(String email);
+    public Employee findUserByEmail(String email);
 }

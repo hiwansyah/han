@@ -1,0 +1,31 @@
+<div th:fragment = "updateModal" class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">New Ticket Request</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+
+
+                    <div class="modal-body">
+                        <form action="#" th:action="@{/employeeSave}" th:object ="${employee}" method="POST">
+                            <input type="text" th:field="*{employeeId}" placeholder=" .. . Id " class="form-control mb-4 col-4">
+                            <input type="text" th:field="*{employeeName}" placeholder=" .. . Name " class="form-control mb-4 col-4">
+                            <input type="text" th:field="*{password}" placeholder=" .. . Pass " class="form-control mb-4 col-4">
+                            <input type="text" th:field="*{email}" placeholder=" .. . Email " class="form-control mb-4 col-4">
+                            <input type="text" th:field="*{positionId}" placeholder=" .. . Position Id " class="form-control mb-4 col-4">
+                            <input type="text" th:field="*{divisionId}" placeholder=" .. . Division Id" class="form-control mb-4 col-4">
+                            <input type="text" th:field="*{roleId}" placeholder=" .. . Division Id" class="form-control mb-4 col-4">
+                            <button type="submit" class="btn btn-success">Save Employee</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="#">Submit</a>
+                    </div>
+                </div>
+            </div>
+        </div>

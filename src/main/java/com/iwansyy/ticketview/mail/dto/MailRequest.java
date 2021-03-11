@@ -3,13 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.iwansyy.ticketview.controller;
+
+
+package com.iwansyy.ticketview.mail.dto;
+
+import lombok.Data;
 
 /**
  *
  * @author iwansy
  */
 
-public class ticketController {
+@Data
+public class MailRequest {
+    private String name;
+    private String to;
+    private String from;
+    private String subject;
     
 }

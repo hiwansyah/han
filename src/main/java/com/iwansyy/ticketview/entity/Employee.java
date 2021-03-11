@@ -8,7 +8,6 @@ package com.iwansyy.ticketview.entity;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -49,7 +48,7 @@ public class Employee implements Serializable {
     @Basic(optional = false)
     @Column(name = "email")
     private String email;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employeeId", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "employeeId", fetch = FetchType.LAZY)
     private List<Ticket> ticketList;
     @OneToMany(mappedBy = "employeeId", fetch = FetchType.LAZY)
     private List<Logticket> logticketList;

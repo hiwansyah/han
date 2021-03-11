@@ -6,6 +6,7 @@
 
 package com.iwansyy.ticketview.security;
 
+import com.iwansyy.ticketview.entity.Employee;
 import com.iwansyy.ticketview.entity.Users;
 import com.iwansyy.ticketview.serviceImplement.UserServiceImplements;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,13 +43,13 @@ public class UserDetailsServiceImpl implements UserDetailsService{
     
     private Users userConfig(String username){
         String pwd = null, role = null;
-        Users user = usi.findUserByEmail(username);
+        Employee user = usi.findUserByEmail(username);
         if(user != null){
             user = usi.findUserByEmail(username);
             if(user != null) {
-                username = user.getUsername();
+                username = user.getEmail();
                 pwd = user.getPassword();
-                role = user.getRoles();
+                role = user.getRoleId().getRoleName();
             }else {
                 System.out.println("ACCESS DENIED");
             }

@@ -5,7 +5,7 @@
  */
 package com.iwansyy.ticketview.serviceImplement;
 
-import com.iwansyy.ticketview.entity.Users;
+import com.iwansyy.ticketview.entity.Employee;
 import com.iwansyy.ticketview.repository.UserRepository;
 import com.iwansyy.ticketview.serviceService.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class UserServiceImplements implements UserServiceInterface{
     UserServiceInterface userServiceInterface;
     
     @Override
-    public Users findUserByEmail(String email) {
+    public Employee findUserByEmail(String email) {
         return repo.findUserByEmail(email);
     }
    
